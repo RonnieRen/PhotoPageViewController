@@ -20,7 +20,7 @@ class ImagePageViewController: UIPageViewController, UIPageViewControllerDataSou
         
         var urls: [NSURL] = []
         for var i = 1; i < 7; i++ {
-            urls.append(NSURL(string: "https://github.com/RonnieRen/PhotoPageViewController/Images/\(i).jpg")!)
+            urls.append(NSURL(fileURLWithPath: NSBundle(forClass: ImagePageViewController.self).pathForResource("\(i)", ofType: "jpg")!))
         }
         
         self.imageURLs = urls
@@ -57,14 +57,14 @@ class ImagePageViewController: UIPageViewController, UIPageViewControllerDataSou
             if let allImages = self.imageURLs, imageVC = currentPageViewController as? ImagePageItemViewController, imageURL = imageVC.imageURL, pageIndex = allImages.indexOf(imageURL) where pageIndex.advancedBy(offset) >= 0 &&  allImages.count > pageIndex.advancedBy(offset)   {
                 let nextImageURL = allImages[pageIndex.advancedBy(offset)]
                 
-                let vc = ImagePageItemViewController()
+                let vc = UIStoryboard.Scene.Main.pageItemViewControllerViewController()
                 vc.loadView()
                 vc.imageURL = nextImageURL
                 return vc
             }
         }
         else if let allImages = self.imageURLs where offset == -1  {
-            let vc = ImagePageItemViewController()
+            let vc = UIStoryboard.Scene.Main.pageItemViewControllerViewController()
             vc.loadView()
             vc.imageURL = allImages[0]
             return vc

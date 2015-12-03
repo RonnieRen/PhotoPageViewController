@@ -12,8 +12,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     var imageURL: NSURL? {
         didSet(oldImageURL) {
-            if let _ = self.imageURL {
-                self.imageView.image = UIImage(contentsOfFile: self.imageURL!.path!)
+            if let imgURL = self.imageURL {
+                self.imageView.image = UIImage(contentsOfFile: imgURL.path!)
             }
             else {
                 self.imageView.image = nil

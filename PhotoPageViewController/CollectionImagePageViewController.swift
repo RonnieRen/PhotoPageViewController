@@ -17,14 +17,10 @@ class CollectionImagePageViewController: UIViewController, UICollectionViewDataS
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let docPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first {
-
-            for imageItem in ["1","2","3","4"] {
-                if let imageURL = NSURL(string: docPath + "/" + imageItem + ".png") {
-                    self.imageURLs.append(imageURL)
-                }
-            }
+        for var i = 1; i < 7; i++ {
+            self.imageURLs.append(NSURL(fileURLWithPath: NSBundle(forClass: ImagePageViewController.self).pathForResource("\(i)", ofType: "jpg")!))
         }
+        
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.pageControl.numberOfPages = self.imageURLs.count
